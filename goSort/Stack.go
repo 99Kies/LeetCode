@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type Node struct {
 	Next *Node
 	Val  int
@@ -18,6 +20,7 @@ func CreateStackNode(value int) *Node {
 }
 
 func CreateStack() *Stack {
+	// 下标0 是空Node，所以Top的时候是 Stack.top.Next.Val
 	return &Stack{
 		&Node{
 			nil,
@@ -55,4 +58,26 @@ func (stack *Stack) Top() int {
 		return -999
 	}
 	return stack.top.Next.Val
+}
+
+func main() {
+	aStack := CreateStack()
+	fmt.Println("top ", aStack.Top())
+	fmt.Println(aStack.top.Val)
+
+	aNode := CreateStackNode(1)
+	aStack.top.Next = aNode
+
+	fmt.Println(aStack.Top())
+	fmt.Println(aStack.top.Val)
+	//aStack.Push(1)
+	//fmt.Println(aStack.Top())
+	//aStack.Push(2)
+	//aStack.Push(3)
+	//aStack.Push(4)
+	//aStack.Push(5)
+	//fmt.Println(aStack.Top())
+	//aStack.Pop()
+	//fmt.Println(aStack.Top())
+
 }
