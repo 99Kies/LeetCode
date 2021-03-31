@@ -61,22 +61,39 @@ func (stack *Stack) Top() int {
 	return stack.top.Next.Val
 }
 
+func (stack *Stack) UpsideDown() {
+	// 倒着输出
+	if stack.top.Next == nil {
+		fmt.Println("This is Empty Stack")
+		return
+	}
+	p := stack.top.Next
+	for p != nil {
+		fmt.Printf("%d ", p.Val)
+		p = p.Next
+	}
+}
+
+func InsideUp(stack *Node) {
+	if stack != nil {
+		if stack.Next != nil {
+			InsideUp(stack.Next)
+		}
+		fmt.Printf("%d ", stack.Val)
+	}
+}
+
 func main() {
 	aStack := CreateStack()
-	fmt.Println("top ", aStack.Top())
-	fmt.Println(aStack.top.Val)
-
-	aNode := CreateStackNode(1)
-	aStack.top.Next = aNode
-
-	fmt.Println(aStack.Top())
-	fmt.Println(aStack.top.Val)
-	//aStack.Push(1)
 	//fmt.Println(aStack.Top())
-	//aStack.Push(2)
-	//aStack.Push(3)
-	//aStack.Push(4)
-	//aStack.Push(5)
+	aStack.Push(1)
+	aStack.Push(2)
+	aStack.Push(3)
+	aStack.Push(4)
+	aStack.Push(5)
+	aStack.UpsideDown()
+	fmt.Println()
+	InsideUp(aStack.top)
 	//fmt.Println(aStack.Top())
 	//aStack.Pop()
 	//fmt.Println(aStack.Top())

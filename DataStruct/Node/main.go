@@ -125,12 +125,32 @@ func (this *List) ShowList() {
 	}
 }
 
+//
+//func (this *List)UpsideDown() {
+//	if !this.IsEmpty(){
+//		cur := this.headNode
+//		for cur != nil {
+//
+//		}
+//	}
+//}
+
+func UpsideDownList(pHead *ListNode) {
+	// 通过递归倒着输出链表
+	if pHead != nil {
+		if pHead.Next != nil {
+			UpsideDownList(pHead.Next)
+		}
+		fmt.Printf("%d ", pHead.Val)
+	}
+}
+
 func main() {
 	list := List{}
 	list.Append(1)
 	list.Append(2)
 	list.Append(3)
 	list.Append(4)
-	list.Add("a")
 	list.ShowList()
+	UpsideDownList(list.headNode)
 }

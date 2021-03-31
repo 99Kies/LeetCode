@@ -1,3 +1,4 @@
+// 二叉排序树
 package main
 
 import "fmt"
@@ -72,11 +73,11 @@ func (this *BST) Delete(value int) *BST {
 }
 
 //按顺序获得树中元素
-func (this *BST) PostOrder(node *BST) {
+func (this *BST) InOrder(node *BST) {
 	if node != nil {
-		this.PostOrder(node.Left)
+		this.InOrder(node.Left)
 		fmt.Printf("%d ", node.Val)
-		this.PostOrder(node.Right)
+		this.InOrder(node.Right)
 	}
 }
 
@@ -160,5 +161,5 @@ func main() {
 	fmt.Println(bsTree.getMin())
 	fmt.Println(bsTree.getMax())
 
-	bsTree.PostOrder(bsTree)
+	bsTree.InOrder(bsTree)
 }
