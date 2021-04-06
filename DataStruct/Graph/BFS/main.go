@@ -67,10 +67,24 @@ func (g *Graph) BFS(n *Node) {
 		g.BFS(iNode)
 	}
 }
-
+func (g *Graph) huifenBFS(node *Node) {
+	var adNodes []*Node
+	node.searched = true
+	fmt.Printf("%d:", node.value)
+	for _, iNode := range g.edges[node] {
+		if !iNode.searched {
+			adNodes = append(adNodes, iNode)
+			iNode.searched = true
+			fmt.Printf("%v ", iNode.value)
+		}
+	}
+	fmt.Println()
+	for _, iNode := range adNodes {
+		g.huifenBFS(iNode)
+	}
+}
 func main() {
 	g := initGraph()
-	g.Print()
-	fmt.Println()
+	//g.Print()
 	g.BFS(g.nodes[0])
 }
