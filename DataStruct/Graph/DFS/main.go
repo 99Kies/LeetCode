@@ -1,10 +1,10 @@
-// BFS 广度优先算法
+// DFS 深度优先算法
 package main
 
 import "fmt"
 
 type Node struct {
-	value    int
+	value    int //节点为int型
 	searched bool
 }
 
@@ -13,6 +13,8 @@ type Graph struct {
 	edges map[*Node][]*Node //邻接表示的无向图
 }
 
+//增加节点
+//可以理解为Graph的成员函数
 func (g *Graph) AddNode(n *Node) {
 	g.nodes = append(g.nodes, n)
 }
@@ -35,6 +37,29 @@ func (g *Graph) Print() {
 	}
 }
 
+func (g *Graph) DFS() {
+	for _, iNode := range g.nodes {
+		if !iNode.searched {
+			iNode.searched = true
+			fmt.Printf("%v->", iNode.value)
+			g.visitNode(iNode)
+			fmt.Printf("\n")
+			g.DFS()
+		}
+	}
+}
+
+func (g *Graph) visitNode(n *Node) {
+	for _, iNode := range g.edges[n] {
+		if !iNode.searched {
+			iNode.searched = true
+			fmt.Printf("%v->", iNode.value)
+			g.visitNode(iNode)
+			return
+		}
+	}
+}
+
 func initGraph() Graph {
 	g := Graph{}
 	for i := 1; i <= 9; i++ {
@@ -51,26 +76,18 @@ func initGraph() Graph {
 	return g
 }
 
-func (g *Graph) BFS(n *Node) {
-	var adNodes []*Node //存储待搜索节点
-	n.searched = true
-	fmt.Printf("%d:", n.value)
-	for _, iNode := range g.edges[n] {
-		if !iNode.searched {
-			adNodes = append(adNodes, iNode)
-			iNode.searched = true
-			fmt.Printf("%v ", iNode.value)
-		}
-	}
-	fmt.Printf("\n")
-	for _, iNode := range adNodes {
-		g.BFS(iNode)
-	}
-}
+//func DFS(graph *Graph, used []int, x int, y int) {
+//	if (graph )
+//}
 
 func main() {
 	g := initGraph()
 	g.Print()
 	fmt.Println()
-	g.BFS(g.nodes[0])
+
+	//g.nodes[0].searched = true
+	//fmt.Printf("%v->",g.nodes[0].value)
+	//g.visitNode(g.nodes[0])
+
+	g.DFS()
 }
