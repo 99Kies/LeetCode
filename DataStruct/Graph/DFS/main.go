@@ -9,7 +9,7 @@ type Node struct {
 }
 
 type Graph struct {
-	nodes []*Node
+	nodes []*Node           // 所有的节点
 	edges map[*Node][]*Node //邻接表示的无向图
 }
 
@@ -60,6 +60,29 @@ func (g *Graph) visitNode(n *Node) {
 	}
 }
 
+func (g *Graph) huifenvisitNode(n *Node) {
+	for _, iNode := range g.edges[n] {
+		if !iNode.searched {
+			iNode.searched = true
+			fmt.Printf("%v->", iNode.value)
+			g.huifenvisitNode(iNode)
+			return
+		}
+	}
+}
+
+func (g *Graph) huifenDFS() {
+	for _, iNode := range g.nodes {
+		if !iNode.searched {
+			iNode.searched = true
+			fmt.Printf("%v->", iNode.value)
+			g.huifenvisitNode(iNode)
+			fmt.Printf("\n")
+			g.huifenDFS()
+		}
+	}
+}
+
 func initGraph() Graph {
 	g := Graph{}
 	for i := 1; i <= 9; i++ {
@@ -85,9 +108,24 @@ func main() {
 	g.Print()
 	fmt.Println()
 
-	//g.nodes[0].searched = true
-	//fmt.Printf("%v->",g.nodes[0].value)
-	//g.visitNode(g.nodes[0])
+	g.nodes[0].searched = true
+	// 选择开始的节点，然后按顺序进行遍历节点。
+	fmt.Printf("%v->", g.nodes[0].value)
+	g.visitNode(g.nodes[0])
 
-	g.DFS()
+	fmt.Println()
+	fmt.Println()
+	g = initGraph()
+	g.nodes[1].searched = true
+	fmt.Printf("%v->", g.nodes[1].value)
+	g.visitNode(g.nodes[1])
+
+	fmt.Println()
+	fmt.Println()
+	g = initGraph()
+	g.nodes[2].searched = true
+	fmt.Printf("%v->", g.nodes[2].value)
+	g.visitNode(g.nodes[2])
+
+	//g.DFS()
 }
