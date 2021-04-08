@@ -37,9 +37,7 @@ func main() {
 					n = n - 1
 				}
 			}
-
 		}
-
 	}
 	length := len(nums)
 	fmt.Println(length)
