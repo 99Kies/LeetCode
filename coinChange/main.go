@@ -23,23 +23,23 @@ func waysToChange(n int) int {
 }
 
 func coinChange(A []int, M int) int {
-	f := make([]int, M+1)
+	dp := make([]int, M+1)
 	n := len(A)
 
-	f[0] = 0
+	dp[0] = 0
 
 	for i := 1; i <= M; i++ {
-		f[i] = 999
+		dp[i] = 999
 		for j := 0; j < n; j++ {
-			if i >= A[j] && f[i-A[j]] != 999 {
-				f[i] = min(f[i-A[j]], f[i])
+			if i >= A[j] && dp[i-A[j]] != 999 {
+				dp[i] = min(dp[i-A[j]], dp[i])
 			}
 		}
 	}
-	if f[M] == 999 {
-		f[M] = -1
+	if dp[M] == 999 {
+		dp[M] = -1
 	}
-	return f[M]
+	return dp[M]
 }
 
 func min(x, y int) int {
