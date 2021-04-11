@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func diagonalSum(mat [][]int) int {
 	col_len := len(mat[0])
 	sum := 0
@@ -21,5 +23,6 @@ func diagonalSum(mat [][]int) int {
 
 func main() {
 	mat := [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}
-	diagonalSum(mat)
+	res := diagonalSum(mat)
+	fmt.Println(res)
 }
