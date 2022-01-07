@@ -20,8 +20,8 @@ func quickSort(nums []int, left int, right int) {
 		nums[i] = nums[j]
 	}
 	nums[j] = p
-	//quickSort(nums, left, i-1)
-	//quickSort(nums, i+1, right)
+	quickSort(nums, left, i-1)
+	quickSort(nums, i+1, right)
 }
 
 func quickSortmy(nums []int, left int, right int) {
